@@ -3,6 +3,8 @@ require('colors')
 require('telescope-config')
 require('coc-config')
 
+vim.o.shiftwidth = 4
+
 require'nvim-treesitter.configs'.setup {
   ensure_installed = "all",
   ignore_install = { "phpdoc" },
@@ -35,5 +37,9 @@ return require('packer').startup(function()
     config = function()
       require"surround".setup {mappings_style = "surround"}
     end
+  }
+  use {
+    'github/copilot.vim',
+    branch = 'release'
   }
 end)
