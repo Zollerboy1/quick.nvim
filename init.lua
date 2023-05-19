@@ -5,6 +5,8 @@ require('coc-config')
 
 vim.o.shiftwidth = 4
 
+require'nvim-treesitter.install'.prefer_git = true
+
 require'nvim-treesitter.configs'.setup {
   ensure_installed = "all",
   ignore_install = { "phpdoc" },
