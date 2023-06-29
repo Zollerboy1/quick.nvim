@@ -1,2 +1,2 @@
-vim.cmd([[colorscheme rasmus]])
+vim.cmd([[colorscheme tokyonight]])
 vim.o.background = 'dark'
