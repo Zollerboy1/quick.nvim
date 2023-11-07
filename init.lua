@@ -44,4 +44,10 @@ return require('packer').startup(function()
     'github/copilot.vim',
     branch = 'release'
   }
+  use { 
+    'folke/tokyonight.nvim',
+    config = function()
+      require("configs.tokyonight").setup()
+    end
+  }
 end)
