@@ -23,17 +23,8 @@ vim.opt.pumheight = 10
 vim.opt.scrolloff = 3
 vim.opt.sidescrolloff = 3
 vim.opt.shiftwidth = 4
-
--- Helpers
-local function change_colorscheme()
-	local m = vim.fn.system("defaults read -g AppleInterfaceStyle")
-	m = m:gsub("%s+", "") -- trim whitespace
-	if m == "Dark" then
-		vim.o.background = "dark"
-	else
-		vim.o.background = "light"
-	end
-end
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
 
 -- Basic mappings
 vim.keymap.set("n", "<C-H>", "<C-W><C-H>")
@@ -83,7 +74,16 @@ require("lazy").setup({
 	{ "JoosepAlviste/nvim-ts-context-commentstring", event = "VeryLazy" },
 
 	-- Copilot
-	{ 'zbirenbaum/copilot.lua' },
+	{ 
+		"zbirenbaum/copilot.lua",
+		config = function()
+			require("copilot").setup({
+				suggestion = {
+					auto_trigger = true,
+				},
+			})
+		end,
+	},
 
 	-- File explorer
 	{
@@ -181,7 +181,7 @@ require("lazy").setup({
 		lazy = false,
 		priority = 1000,
 		config = function()
-			change_colorscheme()
+			vim.o.background = "dark"
 
 			vim.cmd("colorscheme tokyonight")
 		end,
@@ -337,6 +337,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 -- Set up nvim-cmp
 local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 local luasnip = require("luasnip")
+local copilot_suggestion = require("copilot.suggestion")
 local cmp = require("cmp")
 
 cmp.setup({
@@ -356,6 +357,8 @@ cmp.setup({
 				cmp.select_next_item()
 			elseif luasnip.expand_or_jumpable() then
 				luasnip.expand_or_jump()
+			elseif copilot_suggestion.is_visible() then
+				copilot_suggestion.accept()
 			else
 				fallback()
 			end
