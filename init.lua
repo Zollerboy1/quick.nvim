@@ -177,15 +177,13 @@ require("lazy").setup({
 
 	-- Colorscheme
 	{
-		"mcchrish/zenbones.nvim",
+		"folke/tokyonight.nvim",
 		lazy = false,
 		priority = 1000,
 		config = function()
 			change_colorscheme()
 
-			vim.g.zenbones_compat = true
-
-			vim.cmd("colorscheme zenbones")
+			vim.cmd("colorscheme tokyonight")
 		end,
 	},
 
