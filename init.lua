@@ -83,10 +83,7 @@ require("lazy").setup({
 	{ "JoosepAlviste/nvim-ts-context-commentstring", event = "VeryLazy" },
 
 	-- Copilot
-	{
-		'github/copilot.vim',
-		branch = 'release'
-	},
+	{ 'zbirenbaum/copilot.lua' },
 
 	-- File explorer
 	{
